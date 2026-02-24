@@ -4,7 +4,7 @@ import Link from 'next/link';
 export default function GalleryItem({ item }: { item: INotionGallery }) {
   return (
     <Link href={`/gallery/${item.id}`} className="w-fit">
-      <li className="gallery-item opacity-0 -translate-y-[30px] w-fit rounded-lg shadow hover:shadow-lg transition-all">
+      <li className="w-fit rounded-lg shadow hover:shadow-lg transition-all">
         <div className="w-xs p-2">
           <div className="-mt-2 -mx-2">
             <img

@@ -45,31 +45,15 @@ export default function GalleryList({
 
       if (newItems.length === 0) return;
 
-      gsap.set(newItems, { opacity: 0, y: -30, visibility: 'visible' });
-      gsap.to(newItems, {
+      gsap.from(newItems, {
         delay: 0.5,
-        y: 0,
+        y: -10,
+        opacity: 0,
         duration: 0.7,
         stagger: 0.05,
         ease: 'power3.out',
         onStart: () => {
           newItems.forEach((el) => (el.dataset.animated = 'true'));
-        },
-      });
-
-      gsap.to(newItems, {
-        delay: 0.7,
-        opacity: 1,
-        duration: 0.05,
-        stagger: {
-          each: 0.1,
-          from: 'start',
-          repeat: 6,
-          yoyo: true,
-        },
-        ease: 'rough',
-        onComplete: () => {
-          gsap.set(newItems, { opacity: 1 });
         },
       });
     },
@@ -80,7 +64,9 @@ export default function GalleryList({
     <section>
       <ul className="grid grid-cols-3" ref={listRef}>
         {posts.map((el) => (
-          <GalleryItem key={el.id} item={el} />
+          <div key={el.id} className="gallery-item">
+            <GalleryItem key={el.id} item={el} />
+          </div>
         ))}
       </ul>
       {hasMore && <Pagination onClick={loadMore} />}
