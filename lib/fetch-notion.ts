@@ -1,8 +1,12 @@
 'use server';
 
+import { cacheLife, cacheTag } from 'next/cache';
 import { notion } from './notion';
 
 export async function fetchPost(cursor: string | null) {
+  'use cache';
+  cacheTag('posts');
+  cacheLife('days');
   return await notion.dataSources.query({
     data_source_id: process.env.NOTION_POSTS_DATASOURCE_ID!,
     page_size: 10,
@@ -23,6 +27,9 @@ export async function fetchPost(cursor: string | null) {
 }
 
 export async function fetchGallery(cursor: string | null) {
+  'use cache';
+  cacheTag('gallery');
+  cacheLife('days');
   return await notion.dataSources.query({
     data_source_id: process.env.NOTION_GALLERY_DATASOURCE_ID!,
     page_size: 10,
