@@ -26,6 +26,7 @@ export async function POST(req: NextRequest) {
   console.log(body);
 
   revalidateTag('posts', 'max');
+  revalidateTag('gallery', 'max');
 
   return NextResponse.json({ revalidated: true, now: Date.now() });
 }
