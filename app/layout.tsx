@@ -44,6 +44,7 @@ export default function RootLayout({
         className={`${gowooonSerif.variable} ${gloockSerif.variable} ${kalniaSerif.variable} antialiased grid place-items-center`}
       >
         {children}
+        <Background />
       </body>
     </html>
   );
