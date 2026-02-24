@@ -5,7 +5,7 @@
   --foreground: #171717;
 }
 
-@theme {
+@theme inline {
   --color-key: #f96e5b;
   --font-serif: var(--font-gowoon-serif);
   --font-kalnia: var(--font-kalnia-serif);
