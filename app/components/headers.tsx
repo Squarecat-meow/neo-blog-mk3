@@ -14,6 +14,19 @@ export default function Headers() {
 
   useGSAP(() => {
     gsap.set(lineRef.current, { drawSVG: '0%' });
+    gsap.fromTo(
+      'header',
+      {
+        xPercent: -50,
+        scaleX: 0,
+      },
+      {
+        xPercent: 0,
+        scaleX: 1,
+        duration: 0.5,
+        ease: 'power3.inOut',
+      },
+    );
     gsap.to(lineRef.current, {
       delay: 0.3,
       drawSVG: '100%',

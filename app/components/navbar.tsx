@@ -58,6 +58,19 @@ export default function Navbar() {
   const list = ['About', 'Posts', 'Gallery'];
   useGSAP(() => {
     gsap.fromTo(
+      'nav',
+      {
+        yPercent: -50,
+        scaleY: 0,
+      },
+      {
+        yPercent: 0,
+        scaleY: 1,
+        duration: 0.5,
+        ease: 'power3.inOut',
+      },
+    );
+    gsap.fromTo(
       '.button',
       { opacity: 0 },
       {
