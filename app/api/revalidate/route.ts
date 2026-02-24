@@ -10,6 +10,7 @@ export async function POST(req: NextRequest) {
 
   // 'posts' 태그가 달린 모든 캐시를 즉시 만료시킴
   // revalidateTag('posts', 'max');
+  console.log(secret);
 
   return NextResponse.json({ secret });
 }
