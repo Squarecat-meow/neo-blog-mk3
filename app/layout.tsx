@@ -50,7 +50,7 @@ export default function RootLayout({
         <Headers />
         <section className="w-3/4 grow min-h-0 grid grid-cols-6 font-serif">
           <Navbar />
-          <main className="col-span-5 overflow-y-scroll">{children}</main>
+          <main className="p-4 col-span-5 overflow-y-scroll">{children}</main>
         </section>
         <Footer />
         <Background />
