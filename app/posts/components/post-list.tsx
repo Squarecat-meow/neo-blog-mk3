@@ -6,7 +6,7 @@ import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import Pagination from '@/app/components/pagination';
 import { useRef, useState } from 'react';
-import { fetchNotion } from '@/lib/fetch-notion';
+import { fetchPost } from '@/lib/fetch-notion';
 
 gsap.registerPlugin(useGSAP);
 
@@ -28,7 +28,7 @@ export default function PostList({
     if (isLoading || !cursor) return;
     setIsLoading(true);
 
-    const res = await fetchNotion(cursor);
+    const res = await fetchPost(cursor);
 
     setPosts((prev) => [...prev, ...(res.results as INotionPage[])]);
     setHasMore(res.has_more);

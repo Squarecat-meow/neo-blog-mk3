@@ -2,7 +2,7 @@
 
 import { notion } from './notion';
 
-export async function fetchNotion(cursor: string | null) {
+export async function fetchPost(cursor: string | null) {
   return await notion.dataSources.query({
     data_source_id: process.env.NOTION_POSTS_DATASOURCE_ID!,
     page_size: 10,
