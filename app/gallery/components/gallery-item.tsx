@@ -1,0 +1,30 @@
+import { INotionGallery } from '@/types/notion';
+import Link from 'next/link';
+
+export default function GalleryItem({ item }: { item: INotionGallery }) {
+  return (
+    <Link href={`/gallery/${item.id}`} className="w-fit">
+      <li className="gallery-item opacity-0 -translate-y-[30px] w-fit rounded-lg shadow hover:shadow-lg transition-all">
+        <div className="w-xs p-2">
+          <div className="-mt-2 -mx-2">
+            <img
+              src={
+                item.cover?.type === 'file'
+                  ? item.cover.file.url
+                  : item.cover?.external.url
+              }
+              alt={`${item.properties.이름.title[0].plain_text}의 커버`}
+              className="rounded-t-lg w-full"
+            />
+          </div>
+          <h1 className="text-2xl font-bold">
+            {item.properties.이름.title[0].plain_text}
+          </h1>
+          <p className="text-sm">
+            {item.properties.설명.rich_text[0]?.plain_text ?? ''}
+          </p>
+        </div>
+      </li>
+    </Link>
+  );
+}

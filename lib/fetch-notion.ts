@@ -21,3 +21,23 @@ export async function fetchPost(cursor: string | null) {
     },
   });
 }
+
+export async function fetchGallery(cursor: string | null) {
+  return await notion.dataSources.query({
+    data_source_id: process.env.NOTION_GALLERY_DATASOURCE_ID!,
+    page_size: 10,
+    start_cursor: cursor ?? undefined,
+    sorts: [
+      {
+        property: '생성일',
+        direction: 'ascending',
+      },
+    ],
+    filter: {
+      property: '발행',
+      checkbox: {
+        equals: true,
+      },
+    },
+  });
+}
