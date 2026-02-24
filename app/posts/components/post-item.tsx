@@ -4,8 +4,11 @@ import Link from 'next/link';
 
 export default function PostItem({ item }: { item: INotionPage }) {
   return (
-    <Link href={`/posts/${item.id}`} className="hover:shadow transition-shadow">
-      <li className="flex p-2 relative overflow-clip">
+    <Link
+      href={`/posts/${item.id}`}
+      className="post-item hover:shadow transition-shadow rounded-lg"
+    >
+      <li className="flex p-2 relative overflow-clip rounded-lg">
         <div className="space-y-2">
           <h2 className="font-kalnia text-sm">
             {item.properties.게시일.date

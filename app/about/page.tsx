@@ -1,9 +1,24 @@
+'use client';
+
+import { useGSAP } from '@gsap/react';
 import { SiDiscord, SiGithub, SiMisskey } from '@icons-pack/react-simple-icons';
+import gsap from 'gsap';
 import Image from 'next/image';
 
+gsap.registerPlugin(useGSAP);
+
 export default function Page() {
+  useGSAP(() => {
+    gsap.set('#about', { opacity: 0, y: -5 });
+    gsap.to('#about', {
+      opacity: 1,
+      y: 0,
+      duration: 0.5,
+      ease: 'power3.inOut',
+    });
+  });
   return (
-    <section>
+    <section id="about">
       <div className="flex flex-col gap-4">
         <div className="flex">
           <Image
