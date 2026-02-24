@@ -5,6 +5,7 @@ import './globals.css';
 import Background from './components/background';
 import Navbar from './components/navbar';
 import Headers from './components/headers';
+import Footer from './components/footer';
 
 const gloockSerif = Gloock({
   variable: '--font-gloock-serif',
@@ -44,13 +45,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${gowooonSerif.variable} ${gloockSerif.variable} ${kalniaSerif.variable} antialiased grid place-items-center`}
+        className={`${gowooonSerif.variable} ${gloockSerif.variable} ${kalniaSerif.variable} antialiased h-screen flex flex-col items-center`}
       >
         <Headers />
-        <section className="w-3/4 grid grid-cols-6 font-serif">
+        <section className="w-3/4 grow min-h-0 grid grid-cols-6 font-serif">
           <Navbar />
-          <main className="col-span-5">{children}</main>
+          <main className="col-span-5 overflow-y-scroll">{children}</main>
         </section>
+        <Footer />
         <Background />
       </body>
     </html>

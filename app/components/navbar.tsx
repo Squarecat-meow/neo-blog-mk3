@@ -25,7 +25,7 @@ function NavbarButton({ href }: { href: string }) {
 
   return (
     <Link
-      href={`/${href}`}
+      href={`/${href.toLowerCase()}`}
       className="button relative"
       onMouseEnter={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
@@ -94,9 +94,11 @@ export default function Navbar() {
   return (
     <nav className="p-4 border-r border-r-black">
       <ul className="flex flex-col items-center gap-4">
+        <span className="button text-xs text-key">◆</span>
         {list.map((el) => (
-          <NavbarButton key={el} href={el.toLowerCase()} />
+          <NavbarButton key={el} href={el} />
         ))}
+        <span className="button text-xs text-key">◆</span>
       </ul>
     </nav>
   );
