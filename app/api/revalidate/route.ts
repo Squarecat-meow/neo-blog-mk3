@@ -1,16 +1,31 @@
+import { createHmac, timingSafeEqual } from 'crypto';
 import { revalidateTag } from 'next/cache';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(req: NextRequest) {
-  const secret = await req.json();
+  const verificationToken = process.env.NOTION_WEBHOOK_TOKEN;
+  if (!verificationToken) {
+    console.error('Verification token is missing');
+    return NextResponse.json(
+      { error: 'Internal Server Error' },
+      { status: 500 },
+    );
+  }
 
-  // if (secret !== process.env.NOTION_TOKEN) {
-  //   return NextResponse.json({ message: 'Invalid token' }, { status: 401 });
-  // }
+  const body = await req.json();
+  const signature = `sha256=${createHmac('sha256', verificationToken).update(JSON.stringify(body)).digest('hex')}`;
+  const notionSignature = req.headers.get('X-Notion-Signature');
+  const isTrustedPayload =
+    signature &&
+    timingSafeEqual(Buffer.from(signature), Buffer.from(notionSignature || ''));
+  if (!isTrustedPayload) {
+    console.warn('Invalid signature - ignoring request');
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
 
-  // 'posts' 태그가 달린 모든 캐시를 즉시 만료시킴
-  // revalidateTag('posts', 'max');
-  console.log(secret);
+  console.log(body);
 
-  return NextResponse.json({ secret });
+  revalidateTag('posts', 'max');
+
+  return NextResponse.json({ revalidated: true, now: Date.now() });
 }
