@@ -19,16 +19,17 @@ export default function Home() {
 
   return (
     <>
-      <section className="flex">
-        <Image
-          src={'/greetings.png'}
-          alt="메인화면 요즈미나 스탠딩 일러스트"
-          width={300}
-          height={300}
-          className="main-item"
-        />
+      <section className="flex flex-col lg:flex-row items-center">
+        <div className="w-[200px] lg:w-[500px] aspect-square relative">
+          <Image
+            src={'/greetings.png'}
+            alt="메인화면 요즈미나 스탠딩 일러스트"
+            fill
+            className="main-item"
+          />
+        </div>
         <section className="space-y-2">
-          <h1 className="main-item text-4xl font-bold text-center">
+          <h1 className="main-item text-4xl font-bold break-keep">
             요즈미나의 정원에 어서오세요!
           </h1>
           <p className="main-item break-keep">
@@ -46,7 +47,7 @@ export default function Home() {
           </p>
         </section>
       </section>
-      <p className="main-item text-xs text-center">
+      <p className="main-item mt-6 text-xs text-center">
         그 외 재밌어 보이는 것들 추가 예정...
       </p>
     </>

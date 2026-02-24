@@ -62,7 +62,7 @@ export default function GalleryList({
 
   return (
     <section>
-      <ul className="grid grid-cols-3" ref={listRef}>
+      <ul className="grid grid-cols-1 lg:grid-cols-3" ref={listRef}>
         {posts.map((el) => (
           <div key={el.id} className="gallery-item">
             <GalleryItem key={el.id} item={el} />

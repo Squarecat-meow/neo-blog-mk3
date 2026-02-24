@@ -2,12 +2,13 @@ import Image from 'next/image';
 
 export default function Background() {
   return (
-    <div className="w-screen h-screen absolute inset-0 -z-[1]">
+    <div className="w-screen h-screen fixed inset-0 -z-[1]">
       <Image
         src="/bg-1.png"
         alt="Background Element 1"
         width={435}
         height={540}
+        className="absolute inset-0"
       />
       <Image
         src="/bg-2.png"

@@ -79,7 +79,7 @@ export default function PostList({
 
   return (
     <section>
-      <ul className="grid grid-cols-2 gap-2" ref={listRef}>
+      <ul className="grid grid-cols-1 lg:grid-cols-2 gap-2" ref={listRef}>
         {posts.map((el) => (
           <PostItem key={el.id} item={el} />
         ))}

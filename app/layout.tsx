@@ -48,9 +48,11 @@ export default function RootLayout({
         className={`${gowooonSerif.variable} ${gloockSerif.variable} ${kalniaSerif.variable} antialiased h-screen flex flex-col items-center`}
       >
         <Headers />
-        <section className="w-3/4 grow min-h-0 grid grid-cols-6 font-serif">
+        <section className="w-full lg:w-3/4 grow lg:min-h-0 sm:flex sm:flex-col lg:grid lg:grid-cols-6 font-serif">
           <Navbar />
-          <main className="p-4 col-span-5 overflow-y-scroll">{children}</main>
+          <main className="p-2 lg:p-4 lg:col-span-5 lg:overflow-y-scroll">
+            {children}
+          </main>
         </section>
         <Footer />
         <Background />

@@ -20,7 +20,7 @@ export default function Page() {
   return (
     <section id="about">
       <div className="flex flex-col gap-4">
-        <div className="flex">
+        <div className="flex flex-col items-center lg:flex-row">
           <Image
             src={'/profile.png'}
             alt="프로필 사진"
@@ -48,7 +48,7 @@ export default function Page() {
             </p>
           </div>
         </div>
-        <div className="space-y-2">
+        <div className="space-y-2 ml-4 lg:ml-0">
           <h2 className="text-2xl font-bold">다른 링크</h2>
           <p className="flex gap-2 items-center text-sm">
             <SiGithub />
