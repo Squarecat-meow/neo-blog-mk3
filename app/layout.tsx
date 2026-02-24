@@ -35,6 +35,21 @@ const gowooonSerif = localFont({
 export const metadata: Metadata = {
   title: "Mina's Garden",
   description: '요즈미나의 작은 정원(또는 블로그)',
+  openGraph: {
+    title: "Mina's Garden",
+    description: '요즈미나의 작은 정원이에요(또는 그냥 블로그라고도 불러요)!',
+    url: 'https://mina.house',
+    siteName: "Mina's Garden",
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 675,
+        alt: "Mina's Garden OpenGraph Image",
+      },
+    ],
+    type: 'website',
+  },
 };
 
 export default function RootLayout({
