@@ -2,6 +2,9 @@ import type { Metadata } from 'next';
 import { Gloock, Kalnia } from 'next/font/google';
 import localFont from 'next/font/local';
 import './globals.css';
+import Background from './components/background';
+import Navbar from './components/navbar';
+import Headers from './components/headers';
 
 const gloockSerif = Gloock({
   variable: '--font-gloock-serif',
@@ -43,7 +46,11 @@ export default function RootLayout({
       <body
         className={`${gowooonSerif.variable} ${gloockSerif.variable} ${kalniaSerif.variable} antialiased grid place-items-center`}
       >
-        {children}
+        <Headers />
+        <section className="w-3/4 grid grid-cols-6 font-serif">
+          <Navbar />
+          <main className="col-span-5">{children}</main>
+        </section>
         <Background />
       </body>
     </html>
