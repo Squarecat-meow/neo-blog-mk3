@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Analytics } from '@vercel/analytics/next';
 import { Gloock, Kalnia } from 'next/font/google';
 import localFont from 'next/font/local';
 import './globals.css';
@@ -71,6 +72,7 @@ export default function RootLayout({
         </section>
         <Footer />
         <Background />
+        <Analytics />
       </body>
     </html>
   );
