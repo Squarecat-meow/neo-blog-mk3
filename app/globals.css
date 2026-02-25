@@ -24,3 +24,11 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.notion-page {
+  font-family: var(--font-gowoon-serif) !important;
+  margin: 0 !important;
+  width: calc((3 / 4) * 100%) !important;
+  max-width: none !important;
+  padding: 0 !important;
+}
