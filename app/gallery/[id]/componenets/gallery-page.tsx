@@ -1,12 +1,26 @@
 'use client';
 
+import { getNotionProxyUrl } from '@/lib/notion';
 import { INotionGallery } from '@/types/notion';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
+import Image from 'next/image';
 import { ExtendedRecordMap } from 'notion-types';
 import { NotionRenderer } from 'react-notion-x';
 
 gsap.registerPlugin(useGSAP);
+
+function ImageComponent({ url }: { url: string }) {
+  return (
+    <Image
+      src={url}
+      alt="notion image caption"
+      width={1200}
+      height={675}
+      unoptimized
+    />
+  );
+}
 
 export default function GalleryPage({
   post,
@@ -40,7 +54,12 @@ export default function GalleryPage({
           {post.properties.설명.rich_text[0]?.plain_text ?? ''}
         </p>
       </div>
-      <NotionRenderer recordMap={recordMap} className="gallery-element" />
+      <NotionRenderer
+        recordMap={recordMap}
+        className="gallery-element"
+        components={{ nextImage: ImageComponent }}
+        mapImageUrl={(url, block) => getNotionProxyUrl(url ?? '', block.id)}
+      />
     </section>
   );
 }

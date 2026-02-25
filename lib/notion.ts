@@ -16,3 +16,12 @@ export const NOTION_COLORS: Record<string, { text: string; bg: string }> = {
   pink: { text: '#AD1A72', bg: '#F4DFEB' },
   red: { text: '#E03E3E', bg: '#FBE4E4' },
 };
+
+export const getNotionProxyUrl = (url: string, blockId: string) => {
+  if (!url) return;
+
+  if (url.startsWith('https://www.notion.so/image')) return url;
+
+  const encodedUrl = encodeURIComponent(url);
+  return `https://www.notion.so/image/${encodedUrl}?table=block&id=${blockId}&cache=v2`;
+};

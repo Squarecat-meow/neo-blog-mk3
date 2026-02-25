@@ -6,8 +6,23 @@ import Category from '../../components/post-category';
 import { NotionRenderer } from 'react-notion-x';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
+import Image from 'next/image';
+import 'react-notion-x/src/styles.css';
+import { getNotionProxyUrl } from '@/lib/notion';
 
 gsap.registerPlugin(useGSAP);
+
+function ImageComponent({ url }: { url: string }) {
+  return (
+    <Image
+      src={url}
+      alt="notion image caption"
+      width={1200}
+      height={675}
+      unoptimized
+    />
+  );
+}
 
 export default function PostPage({
   post,
@@ -16,6 +31,13 @@ export default function PostPage({
   post: INotionPage;
   recordMap: ExtendedRecordMap;
 }) {
+  const proxyUrl = getNotionProxyUrl(
+    (post.cover?.type === 'file'
+      ? post.cover.file.url
+      : post.cover?.external.url) ?? '',
+    post.id,
+  );
+
   useGSAP(() => {
     gsap.from('.post-element', {
       opacity: 0,
@@ -44,7 +66,21 @@ export default function PostPage({
           <Category category={post.properties.카테고리} />
         </div>
       </div>
-      <NotionRenderer recordMap={recordMap} className="post-element" />
+      {post.cover && (
+        <Image
+          src={proxyUrl ?? ''}
+          alt={`${post.properties.제목.title[0].plain_text}의 커버`}
+          className="w-3/4"
+          width={1200}
+          height={675}
+        />
+      )}
+      <NotionRenderer
+        recordMap={recordMap}
+        className="post-element"
+        mapImageUrl={(url, block) => getNotionProxyUrl(url ?? '', block.id)}
+        components={{ nextImage: ImageComponent }}
+      />
     </section>
   );
 }
