@@ -20,6 +20,9 @@
   .notion-page {
     color: #ededed !important;
   }
+  .notion-asset-caption {
+    color: #94a3b7 !important;
+  }
 }
 
 body {
