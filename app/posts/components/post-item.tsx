@@ -1,8 +1,15 @@
 import { INotionPage } from '@/types/notion';
 import Category from './post-category';
 import Link from 'next/link';
+import { getNotionProxyUrl } from '@/lib/notion';
 
 export default function PostItem({ item }: { item: INotionPage }) {
+  const proxyUrl = getNotionProxyUrl(
+    (item.cover?.type === 'file'
+      ? item.cover.file.url
+      : item.cover?.external.url) ?? '',
+    item.id,
+  );
   return (
     <Link
       href={`/posts/${item.id}`}
@@ -23,14 +30,14 @@ export default function PostItem({ item }: { item: INotionPage }) {
         {item.cover?.type === 'file' ? (
           <img
             className="absolute mask-l-from-0% top-1/2 left-1/2 -translate-1/2 pointer-events-none -z-[1]"
-            src={item.cover.file.url}
+            src={proxyUrl}
             alt={`${item.properties.제목.title[0].plain_text}의 커버`}
           />
         ) : (
           item.cover?.type === 'external' && (
             <img
               className="absolute mask-l-from-0% top-1/2 left-1/2 -translate-1/2 pointer-events-none -z-[1]"
-              src={item.cover.external.url}
+              src={proxyUrl}
               alt={`${item.properties.제목.title[0].plain_text}의 커버`}
             />
           )
