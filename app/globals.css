@@ -17,6 +17,9 @@
     --background: #0a0a0a;
     --foreground: #ededed;
   }
+  .notion-page {
+    color: #ededed !important;
+  }
 }
 
 body {
@@ -25,10 +28,17 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.notion-page {
-  font-family: var(--font-gowoon-serif) !important;
-  margin: 0 !important;
-  width: calc((3 / 4) * 100%) !important;
-  max-width: none !important;
-  padding: 0 !important;
+@media (width >= 80rem) {
+  .notion-page {
+    margin: 0 !important;
+    width: 100% !important;
+    max-width: none !important;
+  }
+}
+@media (width >= 40rem) {
+  .notion-page {
+    margin: 0 !important;
+    width: calc((3 / 4) * 100%) !important;
+    max-width: none !important;
+  }
 }

@@ -70,7 +70,7 @@ export default function PostPage({
         <Image
           src={proxyUrl ?? ''}
           alt={`${post.properties.제목.title[0].plain_text}의 커버`}
-          className="w-3/4"
+          className="post-element w-full md:w-3/4"
           width={1200}
           height={675}
         />
