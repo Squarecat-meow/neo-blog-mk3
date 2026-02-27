@@ -4,6 +4,7 @@ import { NotionAPI } from 'notion-client';
 import { ExtendedRecordMap } from 'notion-types';
 import GalleryPage from './componenets/gallery-page';
 import { Suspense } from 'react';
+import { cacheLife, cacheTag } from 'next/cache';
 
 export default async function Page({
   params,
@@ -18,7 +19,11 @@ export default async function Page({
 }
 
 async function GalleryContent({ params }: { params: Promise<{ id: string }> }) {
+  'use cache';
   const { id } = await params;
+
+  cacheLife('days');
+  cacheTag('posts', id);
 
   const notionAPI = new NotionAPI();
   const [properties, recordMap] = (await Promise.all([

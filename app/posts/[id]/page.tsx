@@ -11,6 +11,7 @@ import { Suspense } from 'react';
 import { Metadata } from 'next';
 import Comments from '../components/comments/comments';
 import { fetchComment } from '@/lib/fetch-comment';
+import { cacheLife, cacheTag } from 'next/cache';
 
 export async function generateMetadata({
   params,
@@ -57,7 +58,11 @@ export default async function Page({
 }
 
 async function PostContent({ params }: { params: Promise<{ id: string }> }) {
+  'use cache';
   const { id } = await params;
+
+  cacheLife('days');
+  cacheTag('posts', id);
 
   const notionAPI = new NotionAPI();
   const [properties, recordMap] = (await Promise.all([
