@@ -57,3 +57,9 @@ export interface INotionGallery extends Omit<PageObjectResponse, 'properties'> {
     };
   };
 }
+
+export interface ICommentPayload {
+  username: string;
+  body: string;
+  id: string;
+}

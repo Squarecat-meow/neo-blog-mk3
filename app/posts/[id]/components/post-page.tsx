@@ -82,7 +82,7 @@ export default function PostPage({
         mapImageUrl={(url, block) => getNotionProxyUrl(url ?? '', block.id)}
         components={{ nextImage: ImageComponent }}
       />
-      <Comments />
+      <Comments id={post.id} />
     </section>
   );
 }
