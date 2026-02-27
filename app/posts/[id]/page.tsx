@@ -1,10 +1,16 @@
 import { notion } from '@/lib/notion';
-import { INotionPage } from '@/types/notion';
+import {
+  ICommentResponse,
+  IGravatarResponse,
+  INotionPage,
+} from '@/types/notion';
 import PostPage from './components/post-page';
 import { NotionAPI } from 'notion-client';
 import { ExtendedRecordMap } from 'notion-types';
 import { Suspense } from 'react';
 import { Metadata } from 'next';
+import Comments from '../components/comments/comments';
+import { fetchComment } from '@/lib/fetch-comment';
 
 export async function generateMetadata({
   params,
@@ -59,5 +65,22 @@ async function PostContent({ params }: { params: Promise<{ id: string }> }) {
     notionAPI.getPage(id),
   ])) as [INotionPage, ExtendedRecordMap];
 
-  return <PostPage post={properties} recordMap={recordMap} />;
+  const res = (await fetchComment(id)) as ICommentResponse[];
+  const profiles = await Promise.all(
+    res.map(async (el) => {
+      const response = await fetch(
+        `https://www.gravatar.com/${el.properties.해시.rich_text[0].plain_text}.json`,
+      );
+      if (!response.ok) return { comment: el, username: null };
+      const data: IGravatarResponse = await response.json();
+      return { comment: el, username: data.entry[0].displayName };
+    }),
+  );
+
+  return (
+    <>
+      <PostPage post={properties} recordMap={recordMap} />
+      <Comments id={properties.id} initialComments={profiles} />
+    </>
+  );
 }

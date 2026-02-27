@@ -9,7 +9,6 @@ import { useGSAP } from '@gsap/react';
 import Image from 'next/image';
 import 'react-notion-x/src/styles.css';
 import { getNotionProxyUrl } from '@/lib/notion';
-import Comments from '../../components/comments/comments';
 
 gsap.registerPlugin(useGSAP);
 
@@ -82,7 +81,6 @@ export default function PostPage({
         mapImageUrl={(url, block) => getNotionProxyUrl(url ?? '', block.id)}
         components={{ nextImage: ImageComponent }}
       />
-      <Comments id={post.id} />
     </section>
   );
 }
