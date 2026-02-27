@@ -9,8 +9,8 @@ export async function fetchPost(cursor: string | null) {
   cacheLife('days');
   return await notion.dataSources.query({
     data_source_id: process.env.NOTION_POSTS_DATASOURCE_ID!,
-    page_size: 10,
-    start_cursor: cursor ?? undefined,
+    ...(cursor ? { page_size: 10 } : {}),
+    ...(cursor ? { start_cursor: cursor } : {}),
     sorts: [
       {
         property: '최종 편집 일시',
