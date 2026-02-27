@@ -59,9 +59,9 @@ export default async function Page({
 
 async function PostContent({ params }: { params: Promise<{ id: string }> }) {
   'use cache';
-  const { id } = await params;
-
   cacheLife('days');
+
+  const { id } = await params;
   cacheTag('posts', id);
 
   const notionAPI = new NotionAPI();
