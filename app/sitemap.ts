@@ -1,9 +1,11 @@
+export const dynamic = 'force-dynamic';
+
 import { fetchPost } from '@/lib/fetch-notion';
 import { INotionPage } from '@/types/notion';
 import { MetadataRoute } from 'next';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const BASE_URL = new URL('https://mina.house');
+  const BASE_URL = 'https://mina.house';
   const staticUrl = ['/', '/about'];
   const staticSitemap = staticUrl.map((url) => ({
     url: `${BASE_URL}${url}`,
