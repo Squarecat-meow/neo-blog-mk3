@@ -36,6 +36,7 @@ const gowooonSerif = localFont({
 export const metadata: Metadata = {
   title: "Mina's Garden",
   description: '요즈미나의 작은 정원(또는 블로그)',
+  metadataBase: new URL('https://mina.house'),
   openGraph: {
     title: "Mina's Garden",
     description: '요즈미나의 작은 정원이에요(또는 그냥 블로그라고도 불러요)!',
