@@ -55,7 +55,7 @@ export default function Headers() {
   });
 
   return (
-    <header className="w-full lg:w-3/4 pt-12 lg:pt-20 pb-4 flex justify-center items-end border-b border-b-black">
+    <header className="w-full lg:w-3/4 pt-12 lg:pt-20 pb-4 flex justify-center items-end border-b border-b-black dark:border-b-white">
       <Link href={'/'} className="w-3xl">
         <div className="w-full flex justify-between items-end">
           <span className="header text-key text-2xl">＊＊＊</span>

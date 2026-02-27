@@ -44,7 +44,7 @@ export default function Footer() {
   });
 
   return (
-    <footer className="font-serif w-full lg:w-3/4 pt-4 pb-8 sm:flex sm:flex-col lg:grid lg:grid-cols-6 border-t border-t-black">
+    <footer className="font-serif w-full lg:w-3/4 pt-4 pb-8 sm:flex sm:flex-col lg:grid lg:grid-cols-6 border-t border-t-black dark:border-t-white">
       <span className="footer-text text-gray-300 text-xs text-center tracking-[0.5em]">
         © 2026.
       </span>

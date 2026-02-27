@@ -92,7 +92,7 @@ export default function Navbar() {
   });
 
   return (
-    <nav className="p-0 lg:p-4 border-r border-r-black">
+    <nav className="p-0 lg:p-4 border-r border-r-black dark:border-r-white">
       <ul className="flex flex-row justify-center lg:flex-col items-center gap-4">
         <span className="button text-xs text-key">◆</span>
         {list.map((el) => (
