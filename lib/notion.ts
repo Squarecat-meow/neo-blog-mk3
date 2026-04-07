@@ -1,7 +1,12 @@
 import { Client } from '@notionhq/client';
+import { cache } from 'react';
 
 export const notion = new Client({
   auth: process.env.NOTION_TOKEN,
+});
+
+export const getNotionPage = cache(async (id: string) => {
+  return notion.pages.retrieve({ page_id: id });
 });
 
 export const NOTION_COLORS: Record<string, { text: string; bg: string }> = {

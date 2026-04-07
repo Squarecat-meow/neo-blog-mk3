@@ -3,6 +3,46 @@
 import { cacheLife, cacheTag } from 'next/cache';
 import { notion } from './notion';
 
+export async function fetchAllPostIds() {
+  const ids: string[] = [];
+  let cursor: string | undefined = undefined;
+
+  do {
+    const res = await notion.dataSources.query({
+      data_source_id: process.env.NOTION_POSTS_DATASOURCE_ID!,
+      ...(cursor ? { start_cursor: cursor } : {}),
+      filter: {
+        property: '발행',
+        checkbox: { equals: true },
+      },
+    });
+    ids.push(...res.results.map((p) => p.id));
+    cursor = res.has_more ? (res.next_cursor ?? undefined) : undefined;
+  } while (cursor);
+
+  return ids;
+}
+
+export async function fetchAllGalleryIds() {
+  const ids: string[] = [];
+  let cursor: string | undefined = undefined;
+
+  do {
+    const res = await notion.dataSources.query({
+      data_source_id: process.env.NOTION_GALLERY_DATASOURCE_ID!,
+      ...(cursor ? { start_cursor: cursor } : {}),
+      filter: {
+        property: '발행',
+        checkbox: { equals: true },
+      },
+    });
+    ids.push(...res.results.map((p) => p.id));
+    cursor = res.has_more ? (res.next_cursor ?? undefined) : undefined;
+  } while (cursor);
+
+  return ids;
+}
+
 export async function fetchPost(cursor: string | null) {
   'use cache';
   cacheTag('posts');

@@ -1,4 +1,4 @@
-import { notion } from '@/lib/notion';
+import { getNotionPage } from '@/lib/notion';
 import {
   ICommentResponse,
   IGravatarResponse,
@@ -11,7 +11,13 @@ import { Suspense } from 'react';
 import { Metadata } from 'next';
 import Comments from '../components/comments/comments';
 import { fetchComment } from '@/lib/fetch-comment';
+import { fetchAllPostIds } from '@/lib/fetch-notion';
 import { cacheLife, cacheTag } from 'next/cache';
+
+export async function generateStaticParams() {
+  const ids = await fetchAllPostIds();
+  return ids.map((id) => ({ id }));
+}
 
 export async function generateMetadata({
   params,
@@ -19,7 +25,7 @@ export async function generateMetadata({
   params: Promise<{ id: string }>;
 }): Promise<Metadata> {
   const { id } = await params;
-  const res = (await notion.pages.retrieve({ page_id: id })) as INotionPage;
+  const res = (await getNotionPage(id)) as INotionPage;
 
   return {
     title: `${res.properties.제목.title[0].plain_text} | Mina's Garden`,
@@ -66,7 +72,7 @@ async function PostContent({ params }: { params: Promise<{ id: string }> }) {
 
   const notionAPI = new NotionAPI();
   const [properties, recordMap] = (await Promise.all([
-    notion.pages.retrieve({ page_id: id }),
+    getNotionPage(id),
     notionAPI.getPage(id),
   ])) as [INotionPage, ExtendedRecordMap];
 

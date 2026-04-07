@@ -1,10 +1,16 @@
-import { notion } from '@/lib/notion';
+import { getNotionPage } from '@/lib/notion';
 import { INotionGallery } from '@/types/notion';
 import { NotionAPI } from 'notion-client';
 import { ExtendedRecordMap } from 'notion-types';
 import GalleryPage from './componenets/gallery-page';
 import { Suspense } from 'react';
 import { cacheLife, cacheTag } from 'next/cache';
+import { fetchAllGalleryIds } from '@/lib/fetch-notion';
+
+export async function generateStaticParams() {
+  const ids = await fetchAllGalleryIds();
+  return ids.map((id) => ({ id }));
+}
 
 export default async function Page({
   params,
@@ -27,7 +33,7 @@ async function GalleryContent({ params }: { params: Promise<{ id: string }> }) {
 
   const notionAPI = new NotionAPI();
   const [properties, recordMap] = (await Promise.all([
-    notion.pages.retrieve({ page_id: id }),
+    getNotionPage(id),
     notionAPI.getPage(id),
   ])) as [INotionGallery, ExtendedRecordMap];
 
